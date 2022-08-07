@@ -56,13 +56,27 @@ return [
 
         'memcached' => [
             'driver' => 'memcached',
-            'persistent_id' => env('MEMCACHED_PERSISTENT_ID'),
+            'persistent_id' => env('MEMCACHED_PERSISTENT_ID', 'memcached_pool_id'),
             'sasl' => [
                 env('MEMCACHED_USERNAME'),
                 env('MEMCACHED_PASSWORD'),
             ],
             'options' => [
-                // Memcached::OPT_CONNECT_TIMEOUT => 2000,
+                // some nicer default options
+                // - nicer TCP options
+                Memcached::OPT_TCP_NODELAY => TRUE,
+                Memcached::OPT_NO_BLOCK => FALSE,
+                // - timeouts
+                Memcached::OPT_CONNECT_TIMEOUT => 2000,    // ms
+                Memcached::OPT_POLL_TIMEOUT => 2000,       // ms
+                Memcached::OPT_RECV_TIMEOUT => 750 * 1000, // us
+                Memcached::OPT_SEND_TIMEOUT => 750 * 1000, // us
+                // - better failover
+                Memcached::OPT_DISTRIBUTION => Memcached::DISTRIBUTION_CONSISTENT,
+                Memcached::OPT_LIBKETAMA_COMPATIBLE => TRUE,
+                Memcached::OPT_RETRY_TIMEOUT => 2,
+                Memcached::OPT_SERVER_FAILURE_LIMIT => 1,
+                Memcached::OPT_AUTO_EJECT_HOSTS => TRUE,
             ],
             'servers' => [
                 [
