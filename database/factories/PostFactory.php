@@ -15,7 +15,8 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence,
-            'body' => $this->faker->text(rand(500,1000))
+            'body' => $this->faker->text(rand(500,1000)),
+            'publication_date' => $this->faker->dateTimeBetween('-1 year', 'next week')
         ];
     }
 }

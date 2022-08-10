@@ -1,77 +1,43 @@
 @props(['post'])
 
+<div class="max-w-xl md:mx-auto sm:text-center lg:max-w-2xl">
+    <h2 class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+      <span class="relative inline-block">
+        <svg viewBox="0 0 52 24" fill="currentColor" class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
+          <defs>
+            <pattern id="db164e35-2a0e-4c0f-ab05-f14edc6d4d30" x="0" y="0" width=".135" height=".30">
+              <circle cx="1" cy="1" r=".7"></circle>
+            </pattern>
+          </defs>
+          <rect fill="url(#db164e35-2a0e-4c0f-ab05-f14edc6d4d30)" width="52" height="24"></rect>
+        </svg>
+      </span>
+        {{$post->title}}
+    </h2>
+
+    <div class="mb-4 sm:text-center ">
+        <div>
+            <p  data-text="{{$post->author->name}}, {{$post->author->dateJoined}}" class="tooltip-text font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700">
+                {{$post->author->name}}</p>
+            <p class="text-sm font-medium leading-4 text-gray-600">Author</p>
+        </div>
+    </div>
+    <p class="mb-2 text-xs font-semibold tracking-wide text-gray-600 uppercase sm:text-center">
+        {{$post->datePosted}}
+    </p>
+
+</div>
+
+
 <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-10 lg:pb-10">
 
     <div class="lg:w-1/2 py-10  mx-auto mb-5">
         <p class="text-base text-gray-700 text-center ">
-            {!! $post->text !!}
+            {!! $post->body !!}
         </p>
-    </div>
-    <div class="max-w-xl mb-5 md:mx-auto sm:text-center lg:max-w-2xl">
-        <div class="mx-16">
-            @foreach($post->tags as $tag)
-                <x-badge class="bg-black text-white mx-2">
-                    {{$tag->name}}
-                </x-badge>
-            @endforeach
-        </div>
     </div>
 
     <hr class="">
 
 </div>
 
-<div class="px-4 mb-10 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-60">
-    @auth
-        <form method="POST" action="{{route('post.comment')}}" class="mb-10">
-            @csrf
-
-            <input type="hidden" name="post_id" value="{{$post->id}}">
-            <div class="mt-4">
-                <x-label for="text" :value="__('Comment')" />
-
-                <textarea name="text" rows="5" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
-            </div>
-
-            <div class="flex items-center justify-end mt-4  text-center">
-                <x-button class="w-full md:inline-block">
-                    Add Comment
-                </x-button>
-            </div>
-        </form>
-    @else
-        <div class="text-center my-6">
-            <a href="{{route('login')}}"
-               class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-            >
-                Login to Comment
-            </a>
-        </div>
-    @endauth
-
-    <div class="max-w-screen-lg sm:mx-auto">
-        @php
-        $comments = $post->comments()->paginate(10);
-        @endphp
-
-        @foreach($comments as $comment)
-            <div class="flex flex-col items-start py-4 rounded sm:px-4 lg:flex-row sm:hover:translate-x-4 sm:hover:bg-blue-gray-50">
-                <div class="mb-4 lg:mb-0">
-                    <h5 class="tooltip-text mb-4 font-bold" data-text="{{$comment->author->name}}, {{$comment->author->dateJoined}}" >
-                        {{$comment->author->name}} <span class="text-gray-600">- {{$comment->created_at->diffForHumans()}}</span>
-                    </h5>
-
-                    <div class="relative pr-8">
-                        <p class="text-base text-gray-700">
-                            {{$comment->text}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-
-    {{$comments->links()}}
-
-
-</div>

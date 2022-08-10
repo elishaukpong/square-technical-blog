@@ -14,7 +14,7 @@
             {{$post->title}}
         </p>
         <p class="max-w-xs mx-auto mb-2 text-gray-700">
-            {{$post->shortText}}
+            {{$post->shortBody}}
         </p>
         <a href="{{route('show.post',$post->id)}}" aria-label="" class="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800">Read more</a>
     </div>
