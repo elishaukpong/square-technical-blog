@@ -14,7 +14,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence,
+            'title' => $this->faker->sentence(),
             'body' => $this->faker->text(rand(500,1000)),
             'publication_date' => $this->faker->dateTimeBetween('-1 year', 'next week')
         ];
