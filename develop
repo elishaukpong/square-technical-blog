@@ -20,6 +20,12 @@ if [ $# -gt 0 ]; then
             docker \
             composer "$@"
 
+    elif [ "$1" == "bash" ]; then
+        shift 1
+        docker-compose exec \
+           docker \
+           bash "$@"
+
     elif [ "$1" == "test" ]; then
         shift 1
         docker-compose exec \

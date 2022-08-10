@@ -10,7 +10,9 @@ RUN apt-get update \
     && dpkg-reconfigure -f noninteractive tzdata
 
 RUN apt-get update \
-    && apt-get install -y curl zip unzip git supervisor sqlite3 \
+    && apt-get install software-properties-common -y\
+    && add-apt-repository ppa:ondrej/php \
+    && apt-get install -y curl zip unzip git supervisor sqlite3 memcached \
        nginx php8.0-fpm php8.0-cli \
        php8.0-pgsql php8.0-sqlite3 php8.0-gd \
        php8.0-curl php8.0-memcached \
