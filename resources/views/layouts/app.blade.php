@@ -33,7 +33,7 @@
                             <rect x="14" y="1" width="7" height="6"></rect>
                             <rect x="14" y="11" width="7" height="12"></rect>
                         </svg>
-                        <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">LumiForm</span>
+                        <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">Square 1</span>
                     </a>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
                         <li><a href="{{route('show.post.all')}}" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Blog</a></li>
@@ -97,7 +97,7 @@
                                                 <rect x="14" y="1" width="7" height="6"></rect>
                                                 <rect x="14" y="11" width="7" height="12"></rect>
                                             </svg>
-                                            <span class="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">Lumiform</span>
+                                            <span class="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">Square 1</span>
                                         </a>
                                     </div>
                                     <div>
