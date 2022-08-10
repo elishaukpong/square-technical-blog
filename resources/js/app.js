@@ -1,3 +1,5 @@
-require('./bootstrap');
-require('./delete-entity');
-require('alpinejs');
+import './bootstrap';
+import Alpine from 'alpinejs';
+window.Alpine = Alpine;
+
+Alpine.start();

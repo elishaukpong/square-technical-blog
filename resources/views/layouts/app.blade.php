@@ -6,7 +6,7 @@
 
     {{$meta ?? ''}}
 
-    <title>{{config('app.vine')}}</title>
+    <title>{{config('app.name')}}</title>
 
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">

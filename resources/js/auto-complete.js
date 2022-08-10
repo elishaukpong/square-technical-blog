@@ -30,6 +30,7 @@ function respondToBlur(e){
 
 function respondToKeyUp(e){
 
+    const ENTER_KEY = 13;
     if(! e.target.value){
         return;
     }
@@ -37,7 +38,7 @@ function respondToKeyUp(e){
     let searchUrl = e.target.dataset.search ;
     let suggestUrl = '/suggest?search=' + e.target.value;
 
-    if(e.which == 13){
+    if(e.which === ENTER_KEY){
         window.location = `${searchUrl}?search=${e.target.value}`;
     }
 

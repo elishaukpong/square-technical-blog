@@ -26,6 +26,8 @@ function respondToBlur(e) {
 }
 
 function respondToKeyUp(e) {
+  var ENTER_KEY = 13;
+
   if (!e.target.value) {
     return;
   }
@@ -33,7 +35,7 @@ function respondToKeyUp(e) {
   var searchUrl = e.target.dataset.search;
   var suggestUrl = '/suggest?search=' + e.target.value;
 
-  if (e.which == 13) {
+  if (e.which === ENTER_KEY) {
     window.location = "".concat(searchUrl, "?search=").concat(e.target.value);
   }
 
