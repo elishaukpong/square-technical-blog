@@ -81,7 +81,7 @@ abstract class BaseRepository implements BaseInterface
     }
 
     /**
-     * @return \Illuminate\Database\Query\Builder|Model
+     * @return Builder
      */
     public function builder()
     {

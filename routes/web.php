@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/blog/{id}/show', [HomeController::class,'show'])->name('show.post');
 Route::get('/blog', [HomeController::class,'posts'])->name('show.post.all');
+Route::get('/blog/{slug}', [HomeController::class,'show'])->name('show.post');
 Route::get('/suggest', [HomeController::class,'suggest'])->name('suggest');
 
 

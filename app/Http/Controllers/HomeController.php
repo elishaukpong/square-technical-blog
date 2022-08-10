@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\PostInterface;
+use App\Models\Post;
 use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
 

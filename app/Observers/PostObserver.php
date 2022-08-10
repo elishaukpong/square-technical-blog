@@ -14,7 +14,7 @@ class PostObserver
      * @param  \App\Models\Post  $post
      * @return void
      */
-    public function saving(Post $post): void
+    public function creating(Post $post): void
     {
         $slug = Str::slug($post->title);
 
@@ -27,6 +27,10 @@ class PostObserver
 
     private function addNumberToSlug(string $slug): string
     {
+        //find the one with the slug using %like%
+        //pick the latest
+        //break the slug and get the last number
+        //increment and youre good
         return $slug;
     }
 

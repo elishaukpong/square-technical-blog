@@ -46,37 +46,17 @@ class BaseController extends Controller
         return $this->makeResponse($entity);
     }
 
-    public function edit($id)
-    {
-        return view($this->editView,$this->params)
-            ->with('entity',$this->interface->findOrFail($id));
-    }
-
     public function show($id)
     {
         return view($this->showView,['entity'=> $this->interface->findOrFail($id)]);
     }
 
-    public function update($entityId)
-    {
-        $entity = $this->interface->update($entityId, $this->request->except(['_token', '_method']));
-        return $this->makeResponse($entity);
-    }
-
-    public function destroy($entityId)
-    {
-        $deleted = $this->interface->delete($entityId);
-        return $this->makeResponse($deleted);
-    }
-
     public function makeResponse($entity)
     {
-        //the notification can be better
-
         $message = 'Action Not Taken!';
 
         if ($entity) {
-            $message = 'Action Successful';
+            $message = 'Action was successful';
         }
 
         if (null === $entity) {
