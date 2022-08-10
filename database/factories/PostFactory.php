@@ -14,7 +14,8 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->sentence,
+            'body' => $this->faker->text(rand(500,1000))
         ];
     }
 }

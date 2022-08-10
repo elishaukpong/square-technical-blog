@@ -36,4 +36,19 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    /**
+     * Indicate that the model's email address should be unverified.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function admin()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'admin',
+                'email' => 'admin@blog.com',
+            ];
+        });
+    }
 }
