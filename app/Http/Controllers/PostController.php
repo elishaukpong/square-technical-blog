@@ -17,7 +17,7 @@ class PostController extends BaseController
     public function __construct(PostInterface $post, PostRequest $request)
     {
         parent::__construct($post,$request);
-        $this->routeIndex = route('admin.post.index');
+        $this->routeIndex = route('admin.posts.index');
     }
 
 }

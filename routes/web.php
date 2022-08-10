@@ -25,7 +25,7 @@ Route::get('/suggest', [HomeController::class,'suggest'])->name('suggest');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
-    Route::resource('post',PostController::class)->except(['show']);
+    Route::resource('posts',PostController::class)->except(['show']);
 });
 
 

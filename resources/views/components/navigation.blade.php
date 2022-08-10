@@ -12,14 +12,9 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts.*')">
+                        Posts
                     </x-nav-link>
-
-                        <x-nav-link :href="route('admin.post.index')" :active="request()->routeIs('admin.post.*')">
-                            Posts
-                        </x-nav-link>
-
                 </div>
             </div>
 
@@ -28,7 +23,7 @@
                 <ul class="mr-6">
                     <li>
                         <input
-                            data-search="{{route('admin.post.index')}}"
+                            data-search="{{route('admin.posts.index')}}"
                             placeholder="Search"
                             id="autocomplete"
                             type="text"
@@ -82,13 +77,9 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts.*')">
+                Posts
             </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('admin.post.index')" :active="request()->routeIs('admin.post.*')">
-                    Posts
-                </x-responsive-nav-link>
 
         </div>
 

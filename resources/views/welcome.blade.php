@@ -34,10 +34,10 @@
                 Start Blogging
             </a>
         </div>
+
     @else
-        <div class="grid max-w-sm gap-5 mb-8 lg:grid-cols-3 sm:mx-auto lg:max-w-full">
-            <x-posts :posts="$posts"/>
-        </div>
+
+        <x-posts :posts="$posts"/>
 
         <div class="text-center mt-16">
             <a href="{{route('show.post.all')}}"
@@ -45,6 +45,6 @@
                 View More
             </a>
         </div>
-    @endempty
+    @endif
 
 </x-app-layout>

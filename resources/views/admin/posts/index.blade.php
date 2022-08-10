@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Posts
 
-            <x-badge :href="route('admin.post.create')" class="bg-teal-accent-400 text-teal-900">
+            <x-badge :href="route('admin.posts.create')" class="bg-teal-accent-400 text-teal-900">
                 Create
             </x-badge>
         </h2>

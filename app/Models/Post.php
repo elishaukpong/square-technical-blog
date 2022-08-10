@@ -18,7 +18,7 @@ class Post extends Model
     ];
 
     public $searchable = [
-        'title', 'body'
+        'title'
     ];
 
     public function author(): BelongsTo
@@ -35,4 +35,14 @@ class Post extends Model
     {
         return $this->publication_date->format('d M Y');
     }
+
+//    /**
+//     * Get the route key for the model.
+//     *
+//     * @return string
+//     */
+//    public function getRouteKeyName(): string
+//    {
+//        return 'slug';
+//    }
 }

@@ -9,7 +9,7 @@
     <div class="px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-60">
         <h2>Create Post</h2>
 
-        <form method="POST" action="{{ route('admin.post.store') }}" class="py-16">
+        <form method="POST" action="{{ route('admin.posts.store') }}" class="py-16">
         @csrf
 
             <div>
