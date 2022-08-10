@@ -2,31 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use App\Services\PostService;
-use Illuminate\Http\Request;
+use App\Contracts\PostInterface;
+use App\Http\Requests\PostRequest;
 
-class PostController extends Controller
+class PostController extends BaseController
 {
-    /**
-     * @var PostService
-     */
-    private $service;
+    protected $limit = 12;
+    protected $viewIndex = 'admin.posts.index';
+    protected $editView = 'admin.posts.edit';
+    protected $createView = 'admin.posts.create';
+    protected $showView = 'admin.posts.show';
+    protected $routeIndex;
 
-    public function __construct(PostService $service)
+    public function __construct(PostInterface $post, PostRequest $request)
     {
-        $this->service = $service;
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return int
-     */
-    public function index()
-    {
-
-        return view('');
+        parent::__construct($post,$request);
+        $this->routeIndex = route('admin.post.index');
     }
 
 }

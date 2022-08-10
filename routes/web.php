@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,12 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/blog/{id}/show', [HomeController::class,'show'])->name('show.post');
 Route::get('/blog', [HomeController::class,'posts'])->name('show.post.all');
 Route::get('/suggest', [HomeController::class,'suggest'])->name('suggest');
-Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
+    Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+    Route::resource('post',PostController::class)->except(['show']);
+});
 
 
 require __DIR__.'/auth.php';

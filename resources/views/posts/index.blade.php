@@ -17,12 +17,7 @@
         </h2>
 
     </div>
-    <div class="grid max-w-sm gap-5 mb-8 lg:grid-cols-3 sm:mx-auto lg:max-w-full">
-        <x-posts :posts="$entities"/>
-    </div>
 
-    <div class="my-5">
-        {{$entities->appends(request()->input())->links()}}
-    </div>
+    <x-posts :posts="$entities"/>
 
 </x-app-layout>
