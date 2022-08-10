@@ -3,21 +3,29 @@
 namespace App\Services;
 use App\Models\Post;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class BlogImporter
 {
     const BLOG_URL = 'https://sq1-api-test.herokuapp.com/posts';
+    const ADMIN_EMAIL = 'admin@blog.com';
 
-    public function handle()
+    public function handle(): void
     {
-        $this->importBlogPosts();
+        try {
+            $this->importBlogPosts();
+        } catch (Exception $e){
+            Log::info($e);
+        }
     }
 
-    private function importBlogPosts()
+    private function importBlogPosts(): void
     {
+
         $request = Http::get(self::BLOG_URL);
-        $user = User::whereEmail('admin@blog.com')->first();
+        $user = User::whereEmail(self::ADMIN_EMAIL)->first();
 
         array_walk($request->object()->data, function($importedPost) use ($user) {
             Post::create([
@@ -29,5 +37,6 @@ class BlogImporter
         });
 
         unset($request);
+
     }
 }
