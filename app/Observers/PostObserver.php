@@ -14,9 +14,20 @@ class PostObserver
      * @param  \App\Models\Post  $post
      * @return void
      */
-    public function saving(Post $post)
+    public function saving(Post $post): void
     {
-        $post->slug = Str::slug($post->title);
+        $slug = Str::slug($post->title);
+
+        if(Post::whereSlug($slug)->exists()){
+            $slug = $this->addNumberToSlug($slug);
+        }
+
+        $post->slug = $slug;
+    }
+
+    private function addNumberToSlug(string $slug): string
+    {
+        return $slug;
     }
 
 }
