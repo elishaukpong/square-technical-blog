@@ -31,26 +31,6 @@ abstract class BaseRepository implements BaseInterface
     protected $model;
 
     /**
-     * @var bool
-     */
-    private $trash = false;
-
-    /**
-     * @var bool
-     */
-    private $withTrash = false;
-
-    /**
-     * @var bool
-     */
-    private $allowCaching = true;
-
-    /**
-     * @var array
-     */
-    private $cache = [];
-
-    /**
      * @param App $app
      */
     public function __construct(App $app)
@@ -121,13 +101,6 @@ abstract class BaseRepository implements BaseInterface
             }
         }
         unset($criteria['search']);
-
-        if ($this->trash) {
-            $latest->onlyTrashed();
-        }
-        if ($this->withTrash) {
-            $latest->withTrashed();
-        }
 
         return $latest->where($criteria);
     }
@@ -348,93 +321,4 @@ abstract class BaseRepository implements BaseInterface
         return $this->model->create($attributes);
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return Model|Model
-     */
-    public function createOrUpdate($attributes = [])
-    {
-        return $this->model->updateOrCreate($attributes);
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return Model
-     */
-    public function createOrFirst($data = [])
-    {
-        return $this->model->firstOrCreate($data);
-    }
-
-    /**
-     * Get entity name.
-     *
-     * @return string
-     */
-    public function entityName()
-    {
-        return $this->getModelClass();
-    }
-
-    /**
-     * @param int $entityId
-     *
-     * @return bool
-     */
-    public function restore($entityId = 0)
-    {
-        /** @var Model|null $entity */
-        $entity = $this->model->withTrashed()
-            ->whereId($entityId)
-            ->first();
-        if ($entity) {
-            return $entity->restore() ?? false;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param int $entityId
-     *
-     * @return bool
-     */
-    public function forceDelete($entityId = 0)
-    {
-        /** @var Model|null $entity */
-        $entity = $this->model->withTrashed()
-            ->whereId($entityId)
-            ->first();
-        if ($entity) {
-            return $entity->forceDelete() ?? false;
-        }
-
-        return false;
-    }
-
-    public function trash()
-    {
-        $this->trash = true;
-        $this->withTrash = false;
-    }
-
-    public function withTrash()
-    {
-        $this->trash = false;
-        $this->withTrash = true;
-    }
-
-    public function disableCaching()
-    {
-        $this->allowCaching = false;
-        return $this;
-    }
-
-    public function allowCaching()
-    {
-        $this->allowCaching = true;
-        return $this;
-    }
 }
