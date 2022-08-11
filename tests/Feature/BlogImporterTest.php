@@ -6,12 +6,8 @@ use App\Models\Post;
 use App\Models\User;
 use App\Services\BlogImporter;
 use Database\Seeders\UserSeeder;
-use Exception;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use Mockery\MockInterface;
 use Tests\TestCase;
 
 class BlogImporterTest extends TestCase

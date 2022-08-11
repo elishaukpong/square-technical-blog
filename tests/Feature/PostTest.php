@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class PostTest extends TestCase
@@ -218,7 +218,7 @@ class PostTest extends TestCase
         $response->assertStatus(302);
     }
 
-    public function getPageWithPosts($url): \Illuminate\Testing\TestResponse
+    public function getPageWithPosts($url): TestResponse
     {
         $posts = $this->createPosts(9);
 
@@ -246,10 +246,6 @@ class PostTest extends TestCase
         ]);
     }
 
-    /**
-     * @param \Illuminate\Testing\TestResponse $response
-     * @return void
-     */
     public function seeButtonsOnRoutes(array $routes, array $textToSee): void
     {
         foreach($routes as $route) {
