@@ -23,7 +23,7 @@ Route::get('/blog/{slug}', [HomeController::class,'show'])->name('show.post');
 Route::get('/suggest', [HomeController::class,'suggest'])->name('suggest');
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function(){
     Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
     Route::resource('posts',PostController::class)->except(['show']);
 });

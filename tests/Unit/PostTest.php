@@ -5,15 +5,13 @@ namespace Tests\Unit;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Str;
-use phpDocumentor\Reflection\Types\This;
 use Tests\TestCase;
 
 class PostTest extends TestCase
 {
-    use DatabaseMigrations, InteractsWithExceptionHandling;
+    use DatabaseMigrations;
 
     public function setUp(): void
     {

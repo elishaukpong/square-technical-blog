@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,7 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//         \App\Models\User::factory()->admin()->create();
+        if(User::whereEmail('admin@blog.com')->doesntExist()){
+            User::factory()->admin()->create();
+        }
 
          $this->call(PostSeeder::class);
     }
