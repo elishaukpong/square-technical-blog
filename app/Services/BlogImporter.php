@@ -33,7 +33,7 @@ class BlogImporter
             });
     }
 
-    private function getPosts(): Collection
+    protected function getPosts(): Collection
     {
         try {
             return collect(
