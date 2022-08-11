@@ -82,4 +82,13 @@ class PostTest extends TestCase
         $this->assertEquals(Str::slug($title) . "_1", $secondPost->slug);
 
     }
+
+    public function test_post_has_rules()
+    {
+        $this->assertEquals(Post::RULES['title'],'required|string');
+        $this->assertEquals(Post::RULES['body'],'required|string');
+        $this->assertEquals(Post::RULES['publication_date'],'required|date');
+        $this->assertEquals(Post::RULES['user_id'],'required|int|exists:users,id');
+
+    }
 }

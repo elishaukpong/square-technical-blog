@@ -11,7 +11,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    const rules = [
+    const RULES = [
         'title' => 'required|string',
         'body' => 'required|string',
         'publication_date' => 'required|date',

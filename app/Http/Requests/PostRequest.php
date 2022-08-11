@@ -37,7 +37,7 @@ class PostRequest extends FormRequest
                 break;
 
             case 'POST':
-                $this->rules = Post::rules;
+                $this->rules = Post::RULES;
                 break;
             default:
                 break;
