@@ -27,11 +27,17 @@ class PostObserver
 
     private function addNumberToSlug(string $slug): string
     {
-        //find the one with the slug using %like%
-        //pick the latest
-        //break the slug and get the last number
-        //increment and youre good
-        return $slug;
+        $post = Post::where('slug','LIKE',$slug.'%')->latest()->first();
+
+        //i am suppressing the error that would come with the $count variable
+        //when there is no int attached to the slug
+        @list($post_slug, $count) = explode('_', $post->slug);
+
+        if($count === null) {
+            return "{$slug}_1";
+        }
+        $count++;
+        return $slug ."_". $count;
     }
 
 }
