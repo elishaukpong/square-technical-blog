@@ -3,12 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Post;
-use App\Services\BlogImporter;
-use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Http;
-use Mockery;
-use Mockery\MockInterface;
 use Tests\TestCase;
 
 class ImportPostCommandTest extends TestCase
