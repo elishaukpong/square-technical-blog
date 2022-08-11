@@ -10,7 +10,7 @@ RUN apt-get update \
     && dpkg-reconfigure -f noninteractive tzdata
 
 RUN apt-get update \
-    && apt-get install -y curl zip unzip git supervisor sqlite3 \
+    && apt-get install -y curl zip unzip git supervisor sqlite3 redis-server\
        nginx php7.4-fpm php7.4-cli \
        php7.4-pgsql php7.4-sqlite3 php7.4-gd \
        php7.4-curl php7.4-memcached \
@@ -29,5 +29,6 @@ ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD conf/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
 ADD script/start-container.sh /usr/bin/start-container
 RUN chmod +x /usr/bin/start-container
+RUN service redis-server start
 
 ENTRYPOINT ["start-container"]

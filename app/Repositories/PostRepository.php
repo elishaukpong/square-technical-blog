@@ -12,4 +12,5 @@ class PostRepository extends BaseRepository implements PostInterface
     {
         return Post::class;
     }
+
 }

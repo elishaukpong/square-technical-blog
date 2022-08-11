@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Cache;
 
 abstract class BaseRepository implements BaseInterface
 {
@@ -152,74 +153,15 @@ abstract class BaseRepository implements BaseInterface
 
     /**
      * @param $entityId
-     * @param array $attributes
-     *
-     * @return bool|Collection|Model|Model
-     */
-    public function update($entityId = 0, $attributes = [])
-    {
-        $item = $this->model->findOrFail($entityId);
-
-        if ($item->update($attributes)) {
-            return $item;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $entityId
-     *
-     * @return bool
-     * @throws Exception
-     *
-     */
-    public function delete($entityId = 0)
-    {
-        $item = $this->model->findOrFail($entityId);
-
-        return $item->delete();
-    }
-
-    /**
-     * @param array $attributes
-     *
-     * @return bool
-     */
-    public function insert($attributes = [])
-    {
-        return $this->model->insert($attributes);
-    }
-
-    /**
-     * @param string $name
-     * @param string $entityId
-     * @param array $criteria
-     *
-     * @return array
-     */
-    public function pluck($name = 'name', $entityId = 'id', $criteria = [])
-    {
-        return $this->filter($criteria)->pluck($name, $entityId)->toArray();
-    }
-
-    /**
-     * @param $entityId
      * @param array $columns
      *
      * @return Model|Model
      */
     public function find($entityId = 0, $columns = ['*'])
     {
-        if ($this->allowCaching) {
-            if (isset($this->cache[$entityId]))
-                return $this->cache[$entityId];
-        }
 
         $entity = $this->model->with($this->with)->find($entityId, $columns);
 
-        if ($this->allowCaching)
-            $this->cache[$entityId] = $entity;
 
         return $entity;
     }
@@ -234,60 +176,12 @@ abstract class BaseRepository implements BaseInterface
      */
     public function findOrFail($entityId = 0, $columns = ['*'])
     {
-        if ($this->allowCaching) {
-            if (isset($this->cache[$entityId]))
-                return $this->cache[$entityId];
-        }
+        return Cache::remember($entityId, function() use($entityId, $columns) {
+            return $this->model->with($this->with)->findOrFail($entityId, $columns);
+        });
 
-        $entity = $this->model->with($this->with)->findOrFail($entityId, $columns);
-
-        if ($this->allowCaching)
-            $this->cache[$entityId] = $entity;
-
-        return $entity;
     }
 
-    /**
-     * @param array $filter
-     * @param array $columns
-     *
-     * @return Model|Model
-     */
-    public function first($filter = [], $columns = ['*'])
-    {
-        if ($this->allowCaching) {
-            if (isset($this->cache['first']))
-                return $this->cache['first'];
-        }
-
-        $entity = $this->filter($filter)->with($this->with)->select($columns)->first();
-
-        if ($this->allowCaching)
-            $this->cache['first'] = $entity;
-
-        return $entity;
-    }
-
-    /**
-     * @param array $filter
-     * @param array $columns
-     *
-     * @return Model|Model
-     */
-    public function last($filter = [], $columns = ['*'])
-    {
-        if ($this->allowCaching) {
-            if (isset($this->cache['last']))
-                return $this->cache['last'];
-        }
-
-        $entity = $this->filter($filter)->with($this->with)->select($columns)->orderBy('id', 'desc')->first();
-
-        if ($this->allowCaching)
-            $this->cache['last'] = $entity;
-
-        return $entity;
-    }
 
     /**
      * @param $haystack
@@ -298,17 +192,6 @@ abstract class BaseRepository implements BaseInterface
     public function search($haystack, $needle)
     {
         return $this->model->where($haystack, 'like', $needle)->get();
-    }
-
-    /**
-     * @param $criteria
-     * @param array $columns
-     *
-     * @return Model|Model
-     */
-    public function findBy($criteria = [], $columns = ['*'])
-    {
-        return $this->model->with($this->with)->select($columns)->where($criteria)->first();
     }
 
     /**
