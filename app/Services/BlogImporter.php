@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\Post;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -35,12 +36,14 @@ class BlogImporter
 
     protected function getPosts(): Collection
     {
+
         try {
-            return collect(
-                Http::get(self::BLOG_URL)
-                    ->object()->data
-            );
-        } catch (Exception $e){
+            $response = Http::get(self::BLOG_URL);
+            $data = $response->throw()->object()->data;
+
+            return collect($data);
+
+        } catch (RequestException | Exception $e){
             Log::info($e);
 
             return collect([]);

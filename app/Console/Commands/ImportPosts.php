@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use App\Services\BlogImporter;
 use Illuminate\Console\Command;
 
@@ -45,6 +46,10 @@ class ImportPosts extends Command
     public function handle()
     {
         $this->info('Starting importing sequence...');
+
+        if(User::whereEmail('admin@blog.com')->doesntExist()){
+            User::factory()->admin()->create();
+        }
 
         $this->blogImporter->handle();
 

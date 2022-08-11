@@ -14,10 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if(User::whereEmail('admin@blog.com')->doesntExist()){
-            User::factory()->admin()->create();
-        }
-
+         $this->call(UserSeeder::class);
          $this->call(PostSeeder::class);
     }
 }

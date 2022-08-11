@@ -2,8 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\Post;
 use App\Services\BlogImporter;
+use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Http;
 use Mockery;
 use Mockery\MockInterface;
 use Tests\TestCase;
@@ -14,16 +17,30 @@ class ImportPostCommandTest extends TestCase
 
     public function test_command_executed_successfully()
     {
-        $this->partialMock(BlogImporter::class, function (MockInterface $mock) {
-            $mock->shouldAllowMockingProtectedMethods()
-                ->shouldReceive('getPosts')
-                ->once()
-                ->andReturn(collect([]));
-        });
+        $posts  = Post::factory(4)
+                        ->imported()
+                        ->make();
+        Http::fake([ '*' => Http::response(['data' => $posts])]);
 
         $this->artisan('posts:import')
             ->expectsOutput('Starting importing sequence...')
             ->expectsOutput('Importing sequence completed...')
             ->assertSuccessful();
+
+        $this->assertDatabaseCount('posts', 4);
+    }
+
+    public function test_command_executed_successfully_when_cant_import()
+    {
+
+        Http::fake([ '*' => Http::response([''], 500)]);
+
+        $this->artisan('posts:import')
+            ->expectsOutput('Starting importing sequence...')
+            ->expectsOutput('Importing sequence completed...')
+            ->assertSuccessful();
+
+        $this->assertDatabaseCount('posts', 0);
+
     }
 }
