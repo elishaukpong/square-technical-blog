@@ -21,7 +21,7 @@
                     type="text"
                     name="title"
                     :value="old('title')"
-                    required autofocus />
+                     autofocus />
             </div>
 
             <div class="mt-4">
@@ -32,7 +32,7 @@
                     class="block mt-1 w-full"
                     rows="10"
                     name="body"
-                    required />
+                     />
             </div>
 
             <div class="mt-4">
@@ -44,7 +44,7 @@
                     type="date"
                     name="publication_date"
                     :value="old('publication_date')"
-                    required />
+                     />
 
                 <x-input
                     type="hidden"

@@ -11,6 +11,13 @@ class Post extends Model
 {
     use HasFactory;
 
+    const rules = [
+        'title' => 'required|string',
+        'body' => 'required|string',
+        'publication_date' => 'required|date',
+        'user_id' => 'required|int|exists:users,id'
+    ];
+
     protected $guarded = [];
 
     protected $dates = [
