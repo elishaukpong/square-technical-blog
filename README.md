@@ -25,5 +25,12 @@ run `./develop art db:seed`
 ## To access the linux container bash
 run `./develop bash`
 
+## To run test suite
+run `./develop test`
+
+
 ### NB: 
 if you face any gotchas, kindly shoot an email: ishukpong418@gmail.com
+
+### Possible Additions: 
+E2E tests using Laravel Dusk
