@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,7 @@ Route::get('/suggest', [HomeController::class,'suggest'])->name('suggest');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function(){
     Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
-    Route::resource('posts',PostController::class)->except(['show']);
+    Route::resource('posts',PostController::class)->only(['create','store','index']);
 });
 
 

@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 
 class PostObserver

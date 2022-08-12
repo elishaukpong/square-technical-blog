@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Contracts\BaseInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 
 class BaseController extends Controller
 {
@@ -48,7 +50,7 @@ class BaseController extends Controller
 
     public function show($id)
     {
-        return view($this->showView,['entity'=> $this->interface->findOrFail($id)]);
+        return view($this->showView,['entity'=> Cache::get($id)]);
     }
 
     public function makeResponse($entity)

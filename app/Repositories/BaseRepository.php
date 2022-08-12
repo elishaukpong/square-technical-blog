@@ -182,7 +182,6 @@ abstract class BaseRepository implements BaseInterface
 
     }
 
-
     /**
      * @param $haystack
      * @param $needle

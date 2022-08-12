@@ -6,6 +6,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -25,12 +26,15 @@ class BlogImporter
 
         $this->getPosts()
             ->each(function($importedPost) use ($user){
-                Post::create([
+                $post = Post::create([
                     'title' => $importedPost->title,
                     'body' => $importedPost->description,
                     'publication_date' => $importedPost->publication_date,
                     'user_id' => $user->id
                 ]);
+
+                Cache::rememberForever($post->slug, fn() => $post);
+
             });
     }
 

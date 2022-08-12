@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\PostInterface;
-use App\Models\Post;
-use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends BaseController
 {
@@ -23,7 +22,11 @@ class HomeController extends BaseController
 
     public function index()
     {
-        return view($this->viewIndex, ['posts' => $this->interface->builder()->latest()->limit(9)->get()]);
+        $posts = Cache::remember('posts', now()->addMinutes(30), function(){
+            $this->interface->builder()->latest()->limit(9)->get();
+        });
+
+        return view($this->viewIndex, ['posts' => $posts]);
     }
 
     public function posts()

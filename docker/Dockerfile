@@ -10,14 +10,15 @@ RUN apt-get update \
     && dpkg-reconfigure -f noninteractive tzdata
 
 RUN apt-get update \
-    && apt-get install -y curl zip unzip git supervisor sqlite3 redis-server\
-       nginx php7.4-fpm php7.4-cli \
+    && apt-get install -y curl zip unzip git supervisor sqlite3 redis-server \
+       nginx php7.4-fpm php7.4-cli nano \
        php7.4-pgsql php7.4-sqlite3 php7.4-gd \
        php7.4-curl php7.4-memcached \
        php7.4-imap php7.4-mysql php7.4-mbstring \
        php7.4-xml php7.4-zip php7.4-bcmath php7.4-soap \
        php7.4-intl php7.4-readline php7.4-xdebug php7.4-redis\
        php-msgpack php-igbinary \
+    && apt-get update \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && apt-get -y autoremove \
     && apt-get clean \
