@@ -18,20 +18,22 @@
 
     </div>
 
-    <div class="w-full mb-4 md:mr-0 sm:text-center md:mb-4 flex justify-end">
-        <form action="{{url()->current()}}">
-            <p>Sort By Publication Date: </p>
-            <input type="hidden" name="order" value="publication_date">
-            <select name="direction" class="block mt-1 w-full">
-                <option value="asc" @if(request()->direction == 'asc') selected @endif>Ascending</option>
-                <option value="desc" @if(request()->direction == 'desc') selected @endif>Descending</option>
-            </select>
+    @if($entities->count())
+        <div class="w-full mb-4 md:mr-0 sm:text-center md:mb-4 flex justify-end">
+            <form action="{{url()->current()}}">
+                <p>Sort By Publication Date: </p>
+                <input type="hidden" name="order" value="publication_date">
+                <select name="direction" class="block mt-1 w-full">
+                    <option value="asc" @if(request()->direction == 'asc') selected @endif>Ascending</option>
+                    <option value="desc" @if(request()->direction == 'desc') selected @endif>Descending</option>
+                </select>
 
-            <button class="w-full items-center justify-center h-12 px-6 font-medium mt-2 text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
-                Sort
-            </button>
-        </form>
-    </div>
+                <button class="w-full items-center justify-center h-12 px-6 font-medium mt-2 text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
+                    Sort
+                </button>
+            </form>
+        </div>
+    @endif
 
 
     <x-posts :posts="$entities"/>

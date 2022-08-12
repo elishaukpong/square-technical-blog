@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(UserSeeder::class);
-         $this->call(PostSeeder::class);
+        try{
+            $this->call(UserSeeder::class);
+            $this->call(PostSeeder::class);
+        }catch(Exception $e) {}
+
     }
 }
