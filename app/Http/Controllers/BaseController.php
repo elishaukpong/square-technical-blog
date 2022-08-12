@@ -50,7 +50,8 @@ class BaseController extends Controller
 
     public function show($id)
     {
-        return view($this->showView,['entity'=> Cache::get($id)]);
+        $entity = Cache::rememberForever($id, fn() => $this->interface->findOrFail($id));
+        return view($this->showView,['entity'=> $entity]);
     }
 
     public function makeResponse($entity)

@@ -176,10 +176,7 @@ abstract class BaseRepository implements BaseInterface
      */
     public function findOrFail($entityId = 0, $columns = ['*'])
     {
-        return Cache::remember($entityId, function() use($entityId, $columns) {
-            return $this->model->with($this->with)->findOrFail($entityId, $columns);
-        });
-
+        return  $this->model->with($this->with)->findOrFail($entityId, $columns);
     }
 
     /**

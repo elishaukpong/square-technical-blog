@@ -26,6 +26,10 @@ class HomeController extends BaseController
             $this->interface->builder()->latest()->limit(9)->get();
         });
 
+        if(! $posts) {
+            $posts = $this->interface->builder()->latest()->limit(9)->get();
+        }
+
         return view($this->viewIndex, ['posts' => $posts]);
     }
 
