@@ -30,7 +30,7 @@
 
         <div class="text-center mt-4">
             <a href="{{route('register')}}"
-               class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-gray-800 transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
+               class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
                 Start Blogging
             </a>
         </div>
@@ -41,7 +41,7 @@
 
         <div class="text-center mt-16">
             <a href="{{route('show.post.all')}}"
-               class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-gray-800 transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
+               class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
                 View More
             </a>
         </div>

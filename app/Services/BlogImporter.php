@@ -26,14 +26,20 @@ class BlogImporter
 
         $this->getPosts()
             ->each(function($importedPost) use ($user){
-                $post = Post::create([
-                    'title' => $importedPost->title,
-                    'body' => $importedPost->description,
-                    'publication_date' => $importedPost->publication_date,
-                    'user_id' => $user->id
-                ]);
+                try{
+                    $post = Post::create([
+                        'title' => $importedPost->title,
+                        'body' => $importedPost->description,
+                        'publication_date' => $importedPost->publication_date,
+                        'user_id' => $user->id
+                    ]);
 
-                Cache::rememberForever($post->slug, fn() => $post);
+                    Cache::rememberForever($post->slug, fn() => $post);
+
+                }catch(Exception $e){
+                    Log::info('Error occured while adding this post');
+                    Log::info($e);
+                }
 
             });
     }

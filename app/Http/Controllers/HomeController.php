@@ -36,6 +36,7 @@ class HomeController extends BaseController
     public function posts()
     {
         $this->viewIndex = 'posts.index';
+
         return parent::index();
     }
 
