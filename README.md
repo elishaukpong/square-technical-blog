@@ -9,11 +9,11 @@ it is for the database docker service
 
 Clone the project and run the following commands sequentially : \
 `./develop start` \
+`./develop bash service redis-server start` \
 `./develop art key:generate` \
 `./develop composer install` \
 `./develop yarn install` \
 `./develop yarn watch` \
-`./develop bash service redis-server start`
 
 
 ### You are good to go
