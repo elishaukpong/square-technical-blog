@@ -24,6 +24,9 @@ Open `127.0.0.1:8080` on your browser
 ## To seed data
 run `./develop art db:seed`
 
+## To import posts from customer's alternative blog
+run `./develop art posts:import`
+
 ## To access the linux container bash
 run `./develop bash`
 
