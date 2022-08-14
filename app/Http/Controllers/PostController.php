@@ -20,4 +20,11 @@ class PostController extends BaseController
         $this->routeIndex = route('admin.posts.index');
     }
 
+    public function index()
+    {
+        $this->request->offsetSet('user_id', auth()->id());
+
+        return parent::index();
+    }
+
 }

@@ -29,8 +29,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::resource('posts',PostController::class)->only(['create','store','index']);
 });
 
-Route::get('hello', function(){
-   return Post::orderBy('publication_date','asc')->get();
-});
-
 require __DIR__.'/auth.php';

@@ -13,6 +13,8 @@ Clone the project and run the following commands sequentially : \
 `./develop composer install` \
 `./develop yarn install` \
 `./develop yarn watch` \
+`./develop bash service redis-server start`
+
 
 ### You are good to go
 
